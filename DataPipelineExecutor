@@ -1,0 +1,44 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.*;
+
+public class DataPipelineExecutor {
+
+    private static final Pattern DEPENDENCY_PATTERN = Pattern.compile("\\b(\\w+\\.sql)\\b");
+
+    public static void main(String[] args) {
+        String sqlFolderPath = "sql";
+
+        // Membangun graf dependensi
+        DirectedGraph graph = buildDependencyGraph(sqlFolderPath);
+
+        // Melakukan topological sort untuk mendapatkan urutan eksekusi
+        List<String> executionOrder = topologicalSort(graph);
+
+        // Eksekusi sequential
+        executeSequentially(executionOrder);
+
+        // Eksekusi paralel (bonus)
+        executeInParallel(executionOrder);
+    }
+
+    private static DirectedGraph buildDependencyGraph(String sqlFolderPath) {
+        // ... (kode untuk membaca file SQL dan membangun graf)
+    }
+
+    private static List<String> topologicalSort(DirectedGraph graph) {
+        // ... (implementasi topological sort)
+    }
+
+    private static void executeSequentially(List<String> executionOrder) {
+        // ... (kode untuk menjalankan file SQL secara sequential)
+    }
+
+    private static void executeInParallel(List<String> executionOrder) {
+        // ... (kode untuk menjalankan file SQL secara paralel menggunakan thread dan semaphore)
+    }
+
+    // ... (kelas DirectedGraph untuk merepresentasikan graf dependensi)
+}
